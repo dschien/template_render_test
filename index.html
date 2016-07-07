@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="underscore.js"></script>
+    <script src="jquery-3.0.0.min.js"></script>
+</head>
+<body>
+
+<div id="content"></div>
+<h1>Question</h1>
+
+<div id="question">
+</div>
+
+<h2>Answers</h2>
+<div id="answers">
+
+</div>
+
+
+<script type="text/javascript">
+    var question_tpl = _.template("<%= question %>");
+    var question_el = question_tpl({'question': 'this is q1'});
+    $("#question").html(question_el);
+
+    for (index = 0; index < 4; ++index) {
+        var answer_tpl = _.template("<input id='a_idx_<%= a_idx %>' data-answer='<%= a_idx %>' type='button'><%= a_txt %></input>");
+        var answer_el = answer_tpl({'a_idx': index, 'a_txt': "this is q" + index});
+        $("#answers").append(answer_el);
+
+
+        $('#a_idx_' + index).on('click', function (ev) {
+            var el_index = $(ev.target).data("answer");
+            console.log(el_index);
+        });
+    }
+
+</script>
+
+</body>
+</html>
